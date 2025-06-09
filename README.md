@@ -1,68 +1,112 @@
-# Sistema de Administración de Pruebas según la Taxonomía de Bloom
+#Sistema de Administración de Pruebas según la Taxonomía de Bloom
 
-Este programa en Java Swing implementa un sistema para administrar la aplicación de pruebas con ítems clasificados según la Taxonomía de Bloom. [cite: 48, 49]
+Este programa en Java Swing implementa un sistema para administrar la aplicación de pruebas con ítems clasificados según la Taxonomía de Bloom. Fue desarrollado como parte del curso **Paradigmas de Programación**.
+
+---
 
 ## Funcionalidades
 
-* **Carga de ítems desde archivo:** Permite cargar la descripción de los ítems construidos de la prueba a aplicar al iniciar el programa. [cite: 49, 50] Se debe hacer mediante la selección de un archivo ubicado en el almacenamiento donde esté ejecutando su programa. [cite: 50, 51] Una vez correctamente cargado, se debe desplegar en la GUI la siguiente información de la prueba: cantidad de ítems y tiempo total estimado. [cite: 51, 52] También debe mostrarse un botón que permita dar inicio a la prueba. [cite: 52, 53] El formato del archivo queda a criterio de los estudiantes. [cite: 53, 54]
-* **Aplicación de la prueba:** En una ventana se debe mostrar un ítem por vez, en donde se muestren las distintas posibilidades de respuesta respecto del ítem. [cite: 54, 55] Se debe disponer en todo momento de las siguientes acciones:
+### Carga de ítems desde archivo
+- Permite cargar la descripción de los ítems desde un archivo al iniciar el programa.
+- Se debe seleccionar un archivo ubicado en el almacenamiento local.
+- Una vez cargado, se muestra en la GUI:
+  - Cantidad total de ítems.
+  - Tiempo total estimado.
+- Aparece un botón para iniciar la prueba.
 
-    * Volver atrás: retrocede al ítem anterior. [cite: 55, 56] Si está en la primera pregunta, esta opción debe estar deshabilitada. [cite: 56, 57]
-    * Avanzar a la siguiente: avanza al siguiente ítem. [cite: 56, 57] Si está en la última pregunta, la funcionalidad de este botón debe cambiar "aviar respuestas", en cuyo caso se procede a la ejecución de la revisión de respuestas.
+### Aplicación de la prueba
+- Se muestra un ítem por vez, con sus opciones de respuesta.
+- Acciones disponibles:
+  - **Volver atrás:** retrocede al ítem anterior (deshabilitado si estás en el primero).
+  - **Avanzar a la siguiente:** pasa al siguiente ítem.
+    - Si estás en el último, el botón cambia a **"Enviar respuestas"** y se revisa la prueba.
+- Las respuestas del usuario se guardan al navegar entre ítems.
 
-    Al moverse entre ítems, se debe mantener la respuesta ingresada por el usuario.
-* **Revisión de respuestas:** Una vez finalizada la prueba y enviadas las respuestas, el sistema debe entregar visualmente un resumen que indique lo siguiente:
+### Revisión de respuestas
+- Muestra visualmente:
+  - Porcentaje de respuestas correctas por nivel de la Taxonomía de Bloom.
+  - Porcentaje de respuestas correctas por tipo de ítem.
+- Permite revisar cada ítem nuevamente, indicando si la respuesta fue correcta o incorrecta.
+- Acciones disponibles durante la revisión:
+  - Volver atrás
+  - Avanzar a la siguiente
+  - Volver al resumen de resultados
 
-    * Porcentaje de respuestas correctas desglosadas según nivel de la Taxonomía de Bloom al que pertenecen. [cite: 57, 58]
-    * Porcentaje de respuestas correctas desglosadas según tipo de ítem.
-
-    Debe disponer además de un botón que permita ejecutar la funcionalidad de revisar las respuestas. [cite: 57, 58] La visualización debe ser equivalente a la de la funcionalidad de Aplicación de la prueba, indicando si la respuesta fue respondida correctamente o no. Las acciones que se deben disponer en todo momento son las de Volver atrás y Avanzar a la siguiente, las que son equivalentes a las de la funcionalidad de Aplicación de la prueba. [cite: 58, 59] Se debe añadir un botón que permita volver a la visualización del resumen de respuestas correctas. [cite: 59, 60]
+---
 
 ## Estructura del Proyecto
 
-El proyecto está organizado en dos paquetes principales:
+Tarea-2/
+├── backend/ # Lógica de la aplicación (ítems, lector de archivos, etc.)
+├── frontend/ # Interfaz gráfica (Java Swing)
+├── Main.java # Clase principal que lanza el programa
+├── items.csv # Archivo con ítems de ejemplo (formato definido abajo)
+└── README.md # Este archivo
 
-* `backend`: Contiene la lógica de la aplicación (clases para ítems, lector de archivos, administrador de pruebas, etc.). [cite: 61, 62]
-* `frontend`: Contiene la implementación de la interfaz gráfica de usuario (GUI) en Java Swing. [cite: 61, 62]
+---
 
-La comunicación entre estos paquetes se realiza mediante el patrón Observer (implementado con `PropertyChangeSupport` en Java). [cite: 61, 62]
+## Comunicación entre módulos
+
+Se usa el patrón **Observer** con `PropertyChangeSupport`:
+- El frontend notifica eventos al backend.
+- El backend actualiza el estado y notifica cambios al frontend de forma asíncrona.
+
+---
 
 ## Cómo ejecutar el programa
 
-1.  **Requisitos:**
-    * Java Development Kit (JDK) 8 o superior instalado.
-    * Entorno de Desarrollo Integrado (IDE) como Eclipse, IntelliJ IDEA o NetBeans (recomendado), o un editor de texto y la línea de comandos.
-2.  **Compilación y ejecución:**
-    * **IDE:** Importa el proyecto en tu IDE y ejecútalo.
-    * **Línea de comandos:**
-        * Compila los archivos Java: `javac backend/*.java frontend/*.java Main.java`
-        * Ejecuta el programa: `java Main`
-3.  **Carga del archivo de ítems:**
-    * Al iniciar el programa, se mostrará una ventana para seleccionar el archivo CSV que contiene los ítems de la prueba.
-    * Selecciona el archivo y se mostrará la información de la prueba (cantidad de ítems y tiempo total).
-    * Haz clic en "Iniciar Prueba" para comenzar.
+### Requisitos
+- Java Development Kit (JDK) 8 o superior
+- IDE como IntelliJ IDEA, Eclipse, NetBeans (recomendado) o editor + terminal
 
-## Formato del archivo de ítems (CSV)
+### Ejecución
 
-El archivo de ítems debe ser un archivo CSV (Comma Separated Values) con la siguiente estructura: [cite: 63, 64, 65, 66, 67]
+#### Desde IDE:
+1. Abre el proyecto.
+2. Ejecuta `Main.java`.
 
-Cada línea representa un ítem de la prueba y contiene los siguientes campos separados por comas:
+#### Desde consola:
+javac backend/*.java frontend/*.java Main.java
+java Main
+Formato del archivo de ítems (CSV)
+Cada línea representa un ítem, con campos separados por comas:
 
-1.  **Tipo de ítem:** `MultipleChoice` o `TrueFalse`
-2.  **Enunciado:** El texto de la pregunta.
-3.  **Nivel de Bloom:** `Recordar`, `Entender`, `Aplicar`, `Analizar`, `Evaluar` o `Crear`
-4.  **Tiempo estimado (segundos):** Un número entero que indica el tiempo estimado para responder la pregunta.
-5.  **Respuesta correcta:**
-    * Para `MultipleChoice`: La letra de la opción correcta (A, B, C, D).
-    * Para `TrueFalse`: `true` o `false` (en minúsculas).
-6.  **Opción A:** (Solo para `MultipleChoice`) El texto de la opción A.
-7.  **Opción B:** (Solo para `MultipleChoice`) El texto de la opción B.
-8.  **Opción C:** (Solo para `MultipleChoice`) El texto de la opción C.
-9.  **Opción D:** (Solo para `MultipleChoice`) El texto de la opción D.
+Tipo,Enunciado,Nivel,Tiempo,Respuesta,OpcionA,OpcionB,OpcionC,OpcionD
+Campos esperados:
+Tipo: MULTIPLE o VF
 
-**Ejemplo:**
+Enunciado: Texto de la pregunta
 
-```csv
-MultipleChoice,"¿Cuál es la capital de Francia?",Recordar,30,A,"París","Londres","Berlín","Roma"
-TrueFalse,"La Tierra es plana.",Recordar,15,false
-MultipleChoice,"¿Qué método se utiliza para ordenar un array en Java?",Aplicar,60,C,"sort()","reverse()","Arrays.sort()","order()"
+Nivel: RECORDAR, ENTENDER, APLICAR, ANALIZAR, EVALUAR, CREAR
+
+Tiempo: Tiempo estimado en segundos
+
+Respuesta:
+
+MULTIPLE: Letra de la opción correcta (A, B, C o D)
+
+VF: VERDADERO o FALSO
+
+OpcionA a OpcionD: Solo para preguntas MULTIPLE
+
+Ejemplos:
+Selección múltiple
+MULTIPLE,¿Cuál es el resultado de 3 * 4?,APLICAR,60,B,6,12,9,15
+Verdadero/Falso
+css
+Copiar
+Editar
+VF,La programación orientada a objetos usa clases y objetos,ENTENDER,30,VERDADERO,,,,
+📚 Créditos y Referencias
+Basado en el trabajo académico y referencias como:
+
+Anderson et al. (2000). A taxonomy for learning, teaching and assessing
+
+Bloom, B. S. (1956). Taxonomy of educational objectives
+
+Fuller et al. (2007). Developing a CS-specific learning taxonomy
+
+Autor
+Desarrollado por: [Constanza Garrido Arriaza]
+Curso: Paradigmas de Programación
+Año: 2025
