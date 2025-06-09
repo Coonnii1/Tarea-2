@@ -84,11 +84,9 @@ Tiempo: Tiempo estimado en segundos
 Respuesta:
 
 MULTIPLE: Letra de la opción correcta (A, B, C o D)
-
 VF: VERDADERO o FALSO
 
 OpcionA a OpcionD: Solo para preguntas MULTIPLE
-
 Ejemplos:
 Selección múltiple
 MULTIPLE,¿Cuál es el resultado de 3 * 4?,APLICAR,60,B,6,12,9,15
@@ -97,14 +95,6 @@ css
 Copiar
 Editar
 VF,La programación orientada a objetos usa clases y objetos,ENTENDER,30,VERDADERO,,,,
-📚 Créditos y Referencias
-Basado en el trabajo académico y referencias como:
-
-Anderson et al. (2000). A taxonomy for learning, teaching and assessing
-
-Bloom, B. S. (1956). Taxonomy of educational objectives
-
-Fuller et al. (2007). Developing a CS-specific learning taxonomy
 
 Autor
 Desarrollado por: [Constanza Garrido Arriaza]
