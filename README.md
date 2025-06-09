@@ -1,67 +1,76 @@
-#Sistema de Administración de Pruebas según la Taxonomía de Bloom
+# Sistema de Administración de Pruebas según la Taxonomía de Bloom
 
-Este programa en Java Swing implementa un sistema para administrar la aplicación de pruebas con ítems clasificados según la Taxonomía de Bloom. Fue desarrollado como parte del curso **Paradigmas de Programación**.
+Este programa en Java Swing implementa un sistema para administrar la aplicación de pruebas con ítems clasificados según la Taxonomía de Bloom.  
+Desarrollado como parte del curso **Paradigmas de Programación**.
+
+---
 
 ## Funcionalidades
 
 ### Carga de ítems desde archivo
-- Permite cargar la descripción de los ítems desde un archivo al iniciar el programa.
-- Se debe seleccionar un archivo ubicado en el almacenamiento local.
-- Una vez cargado, se muestra en la GUI:
+- Permite cargar los ítems desde un archivo al iniciar el programa.
+- Se debe seleccionar un archivo desde el almacenamiento local.
+- Una vez cargado, la GUI muestra:
   - Cantidad total de ítems.
   - Tiempo total estimado.
-- Aparece un botón para iniciar la prueba.
+  - Botón para iniciar la prueba.
 
 ### Aplicación de la prueba
-- Se muestra un ítem por vez, con sus opciones de respuesta.
+- Se muestra un ítem por vez, con opciones de respuesta.
 - Acciones disponibles:
-  - **Volver atrás:** retrocede al ítem anterior (deshabilitado si estás en el primero).
-  - **Avanzar a la siguiente:** pasa al siguiente ítem.
-    - Si estás en el último, el botón cambia a **"Enviar respuestas"** y se revisa la prueba.
-- Las respuestas del usuario se guardan al navegar entre ítems.
+  - **Volver atrás**: retrocede al ítem anterior (deshabilitado si es el primero).
+  - **Avanzar a la siguiente**: avanza al siguiente ítem.
+    - Si es el último, el botón cambia a **"Enviar respuestas"** y se revisa la prueba.
+- Las respuestas se guardan al navegar.
 
 ### Revisión de respuestas
 - Muestra visualmente:
-  - Porcentaje de respuestas correctas por nivel de la Taxonomía de Bloom.
-  - Porcentaje de respuestas correctas por tipo de ítem.
-- Permite revisar cada ítem nuevamente, indicando si la respuesta fue correcta o incorrecta.
-- Acciones disponibles durante la revisión:
+  - Porcentaje de respuestas correctas por **nivel** de Bloom.
+  - Porcentaje de respuestas correctas por **tipo de ítem**.
+- Permite revisar cada ítem, indicando si fue respondido correctamente.
+- Acciones disponibles:
   - Volver atrás
   - Avanzar a la siguiente
-  - Volver al resumen de resultados
+  - Volver al resumen
+
+---
 
 ## Estructura del Proyecto
 
 Tarea-2/
-├── backend/ # Lógica de la aplicación (ítems, lector de archivos, etc.)
-├── frontend/ # Interfaz gráfica (Java Swing)
-├── Main.java # Clase principal que lanza el programa
-├── items.csv # Archivo con ítems de ejemplo (formato definido abajo)
+├── backend/ # Lógica (ítems, carga, controladores)
+├── frontend/ # GUI con Java Swing
+├── Main.java # Clase principal
+├── items.csv # Archivo de ítems de ejemplo
 └── README.md # Este archivo
+
+
+---
 
 ## Comunicación entre módulos
 
-Se usa el patrón **Observer** con `PropertyChangeSupport`:
-- El frontend notifica eventos al backend.
-- El backend actualiza el estado y notifica cambios al frontend de forma asíncrona.
+Se utiliza el patrón **Observer** con `PropertyChangeSupport`:
+
+- El **frontend** notifica eventos al **backend**.
+- El **backend** actualiza estado y notifica al frontend de forma asíncrona.
+
+---
 
 ## Cómo ejecutar el programa
 
 ### Requisitos
-- Java Development Kit (JDK) 8 o superior
-- IDE como IntelliJ IDEA, Eclipse, NetBeans (recomendado) o editor + terminal
+- JDK 8 o superior
+- IDE como IntelliJ IDEA, Eclipse, NetBeans o terminal + editor
 
-### Ejecución
-
-#### Desde IDE:
+### Desde IDE
 1. Abre el proyecto.
 2. Ejecuta `Main.java`.
 
-#### Desde consola:
+### Desde consola
 javac backend/*.java frontend/*.java Main.java
 java Main
 Formato del archivo de ítems (CSV)
-Cada línea representa un ítem, con campos separados por comas:
+Cada línea representa un ítem y tiene los siguientes campos separados por comas:
 
 Tipo,Enunciado,Nivel,Tiempo,Respuesta,OpcionA,OpcionB,OpcionC,OpcionD
 Campos esperados:
@@ -71,25 +80,24 @@ Enunciado: Texto de la pregunta
 
 Nivel: RECORDAR, ENTENDER, APLICAR, ANALIZAR, EVALUAR, CREAR
 
-Tiempo: Tiempo estimado en segundos
+Tiempo: en segundos
 
 Respuesta:
 
-MULTIPLE: Letra de la opción correcta (A, B, C o D)
+MULTIPLE: A, B, C o D
+
 VF: VERDADERO o FALSO
 
-OpcionA a OpcionD: Solo para preguntas MULTIPLE
+Opciones A-D: Solo para MULTIPLE
 
 Ejemplos:
-
-Selección múltiple
+Selección múltiple:
 
 MULTIPLE,¿Cuál es el resultado de 3 * 4?,APLICAR,60,B,6,12,9,15
-Verdadero/Falso
+Verdadero/Falso:
 
 VF,La programación orientada a objetos usa clases y objetos,ENTENDER,30,VERDADERO,,,,
-
 Autor
-Desarrollado por: [Constanza Garrido Arriaza]
+Constanza Garrido Arriaza
 Curso: Paradigmas de Programación
 Año: 2025
