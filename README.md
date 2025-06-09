@@ -2,8 +2,6 @@
 
 Este programa en Java Swing implementa un sistema para administrar la aplicación de pruebas con ítems clasificados según la Taxonomía de Bloom. Fue desarrollado como parte del curso **Paradigmas de Programación**.
 
----
-
 ## Funcionalidades
 
 ### Carga de ítems desde archivo
@@ -32,8 +30,6 @@ Este programa en Java Swing implementa un sistema para administrar la aplicació
   - Avanzar a la siguiente
   - Volver al resumen de resultados
 
----
-
 ## Estructura del Proyecto
 
 Tarea-2/
@@ -43,15 +39,11 @@ Tarea-2/
 ├── items.csv # Archivo con ítems de ejemplo (formato definido abajo)
 └── README.md # Este archivo
 
----
-
 ## Comunicación entre módulos
 
 Se usa el patrón **Observer** con `PropertyChangeSupport`:
 - El frontend notifica eventos al backend.
 - El backend actualiza el estado y notifica cambios al frontend de forma asíncrona.
-
----
 
 ## Cómo ejecutar el programa
 
@@ -87,13 +79,14 @@ MULTIPLE: Letra de la opción correcta (A, B, C o D)
 VF: VERDADERO o FALSO
 
 OpcionA a OpcionD: Solo para preguntas MULTIPLE
+
 Ejemplos:
+
 Selección múltiple
+
 MULTIPLE,¿Cuál es el resultado de 3 * 4?,APLICAR,60,B,6,12,9,15
 Verdadero/Falso
-css
-Copiar
-Editar
+
 VF,La programación orientada a objetos usa clases y objetos,ENTENDER,30,VERDADERO,,,,
 
 Autor
